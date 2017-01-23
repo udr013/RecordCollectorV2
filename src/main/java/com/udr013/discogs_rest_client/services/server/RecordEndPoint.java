@@ -27,9 +27,10 @@ public class RecordEndPoint {
 	}
 
 	@GetMapping
-	public ReleaseModel getRecord(@RequestParam ("recordid") String recordid) {
-		System.out.println("entered getRecord");
-		LOGGER.info("we call the client with id: "+ recordid);
+	public ReleaseModel getRecord(@RequestParam("recordid") String recordid) {
+
+		LOGGER.info("Entered getRecord, and we call the client with id: " + recordid);
+
 		ReleaseModel releaseModel = discogsApiClient.getRelease(recordid);
 		if (releaseModel.getArtists() == null) {
 			LOGGER.info("Hmm, no artist?");

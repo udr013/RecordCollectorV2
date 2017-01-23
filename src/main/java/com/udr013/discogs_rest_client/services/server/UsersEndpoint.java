@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value="api/users", produces="application/json", consumes = "application/json")
+@RequestMapping(value = "api/users", produces = "application/json", consumes = "application/json")
 public class UsersEndpoint {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -32,11 +32,11 @@ public class UsersEndpoint {
 
 
 	@GetMapping
-	public ResponseEntity<CdbUser> getUser(@RequestParam("{userid}") long id){
+	public ResponseEntity<CdbUser> getUser(@RequestParam("{userid}") long id) {
 		System.out.println(id);
 		CdbUser user = userRepository.findOne(id);
 		LOGGER.info("found user" + user);
-		if(user == null){
+		if (user == null) {
 			CdbUser dummyCdbUser = new CdbUser();
 			dummyCdbUser.setFirstName("Dummy");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dummyCdbUser);
@@ -46,17 +46,17 @@ public class UsersEndpoint {
 	}
 
 	@PostMapping
-	public ResponseEntity<CdbUser> saveUser(@RequestBody CdbUser user){
+	public ResponseEntity<CdbUser> saveUser(@RequestBody CdbUser user) {
 		final UserRepository userRepository = this.userRepository;
 		CdbUser newUser = userRepository.save(user);
-		LOGGER.info("saved user: "+ newUser);
+		LOGGER.info("saved user: " + newUser);
 		return ResponseEntity.ok(newUser);
 	}
 
 	@PutMapping
-	public ResponseEntity<CdbUser> updateUser(@RequestBody CdbUser user){
+	public ResponseEntity<CdbUser> updateUser(@RequestBody CdbUser user) {
 		CdbUser existingUser = userRepository.findOne(user.getId());
-		if(existingUser.getId() == 0){
+		if (existingUser.getId() == 0) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		userRepository.save(user);
@@ -64,9 +64,8 @@ public class UsersEndpoint {
 	}
 
 
-
 	@DeleteMapping("/{userid}")
-	public ResponseEntity<String> deleteUser(@PathVariable("{userid}") long id){
+	public ResponseEntity<String> deleteUser(@PathVariable("{userid}") long id) {
 		userRepository.delete(id);
 		return ResponseEntity.ok("user deleted");
 	}
