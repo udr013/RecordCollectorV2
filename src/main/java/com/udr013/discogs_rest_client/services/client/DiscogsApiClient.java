@@ -1,7 +1,7 @@
 package com.udr013.discogs_rest_client.services.client;
 
 
-import com.udr013.discogs_rest_client.models.Bla;
+import com.udr013.discogs_rest_client.models.ArtistRecordsModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
 import com.udr013.discogs_rest_client.models.Result;
 import java.util.List;
@@ -55,18 +55,19 @@ public class DiscogsApiClient {
 		}
 	}
 
-	public List<Result> getArtistReleases(String artist){
-		System.out.println(" We got :"+ artist.length());
+	public List<Result> getArtistAndOrTitleReleases(String artistAlbumquery){
 
 			String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(SEARCH_URL)
-				.queryParam("q",artist)
+				.queryParam("q", artistAlbumquery)
 				.queryParam("key", "LdWzPkVhbDOqKdugvHFG")
 				.queryParam("secret", "iCfdMwZckWpGOCKWKqBaJcWHYhnWyxHS")
 				.build().toString();
+
+			log.info("This url was build:" + url);
 			List<Result> response = restTemplate.exchange(url,
 					HttpMethod
 							.GET, entity,
-					Bla.class).getBody().getResults();
+					ArtistRecordsModel.class).getBody().getResults();
 			return response;
 
 	}

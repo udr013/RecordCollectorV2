@@ -16,39 +16,53 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "api/record", produces = "application/json") //do not use consumes: body not null
-public class RecordEndPoint {
+public class RecordEndPoint{
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	private final DiscogsApiClient discogsApiClient;
 
 	@Autowired
-	public RecordEndPoint(DiscogsApiClient discogsApiClient) {
+	public RecordEndPoint(DiscogsApiClient discogsApiClient){
 		this.discogsApiClient = discogsApiClient;
 	}
 
 	@GetMapping
-	public ReleaseModel getRecord(@RequestParam("recordid") String recordid) {
+	public ReleaseModel getRecord(@RequestParam("recordid") String recordid){
 
 		LOGGER.info("Entered getRecord, and we call the client with id: " + recordid);
 
 		ReleaseModel releaseModel = discogsApiClient.getRelease(recordid);
-		if (releaseModel.getArtists() == null) {
+		if(releaseModel.getArtists() == null){
 			LOGGER.info("Hmm, no artist?");
 		}
 		return releaseModel;
 	}
 
 	@GetMapping("/bla")
-	public List<Result> getRecords(@RequestParam("artist") String artist) {
+	public List<Result> getRecords(@RequestParam("artist") String artist, @RequestParam(required=false, value = "title") String title){
+		StringBuilder s = new StringBuilder();
+
+		if(artist != null && title != null){
+			artist = artist.replace(" ", "-");
+			s.append(artist);
+			title = title.replace(" ", "-");
+			s.append("-" + title);
+		} else{
+			if(artist != null){
+				artist = artist.replace(" ", "-");
+				s.append(artist);
+			} else{
+				if(title != null){
+					title = title.replace(" ", "-");
+					s.append(title);
+				}
+			}
+		}
+		String query = s.toString();
 
 		LOGGER.info("Entered getRecord, and we call the client with id: " + artist);
 
-		return discogsApiClient.getArtistReleases(artist);
-//		if (releaseModels.get(0).getArtists() == null) {
-//			LOGGER.info("Hmm, no artist?");
-//		}
-//		return releaseModels;
+		return discogsApiClient.getArtistAndOrTitleReleases(query);
 	}
-
 }
