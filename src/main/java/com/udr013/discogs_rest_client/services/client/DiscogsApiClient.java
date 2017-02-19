@@ -1,17 +1,16 @@
 package com.udr013.discogs_rest_client.services.client;
 
 
-import com.udr013.discogs_rest_client.models.ArtistRecordsModel;
+import com.udr013.discogs_rest_client.models.PageModel;
+import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
-import com.udr013.discogs_rest_client.models.Result;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,7 +21,10 @@ public class DiscogsApiClient {
 	private static final String BASE_URL = "https://api.discogs.com/";
 	private static final String SEARCH_URL = "/database/search";
 	private static final String RELEASES_URL = "releases";
+	private static final String RATING_URL = "/rating";
 	private static final String CONTENT_TYPE = "application/vnd.discogs.v2.discogs+json";
+	private static final String USER_AGENT = "user-agent";
+	private static final String USER_AGENT_NAME = "discogs_rest_client";
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -35,49 +37,59 @@ public class DiscogsApiClient {
 	static {
 		defaultHeaders = new HttpHeaders();
 		defaultHeaders.set(HttpHeaders.ACCEPT, CONTENT_TYPE);
-		defaultHeaders.set("user-agent", "discogs_rest_client");
-		defaultHeaders.set("Authorization", "LdWzPkVhbDOqKdugvHFGiCfdMwZckWpGOCKWKqBaJcWHYhnWyxHS");
+		defaultHeaders.set(USER_AGENT, USER_AGENT_NAME);
 	}
 
-	public ReleaseModel getRelease(String id) {
+	public PageModel findReleaseBy(MultiValueMap<String, String> params) {
 
-		String url = buildUrl(id);
-		log.info("######### GetRelease request started ##########");
-		try {
-			ReleaseModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ReleaseModel.class).getBody();
-			log.info("Response was successfully returned for: [{}]",response.getId());
-			return response;
+		String url = buildUrl(SEARCH_URL, params, null, null);
+		PageModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageModel.class).getBody();
 
-		} catch (RestClientException re) {
-			log.warn(String.format("Exception on url [%s]", url), re);
+		return response;
 
-			throw re;
+	}
+
+	public ReleaseModel getRelease(MultiValueMap<String, String> params) {
+
+		String url = buildUrl(RELEASES_URL, params, null, null);
+		ReleaseModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ReleaseModel.class).getBody();
+
+		return response;
+
+	}
+
+	public RatingExtendedModel getReleaseRating(String releaseId) {
+
+		String url = buildUrl(RELEASES_URL, null, releaseId, null);
+		RatingExtendedModel response = restTemplate.exchange(url, HttpMethod.GET, entity, RatingExtendedModel.class)
+				.getBody();
+
+		return response;
+
+	}
+
+	private String buildUrl(String endpoint, MultiValueMap<String, String> params, String releaseId, String rating) {
+
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(endpoint).build().toString();
+		if (releaseId == null) {
+			url = UriComponentsBuilder.fromHttpUrl(url).queryParams(params).build().toString();
+
+		} else {
+			url = UriComponentsBuilder.fromHttpUrl(url).pathSegment(releaseId).path(RATING_URL).build().toString();
 		}
-	}
 
-	public List<Result> getArtistAndOrTitleReleases(String artistAlbumquery){
-
-			String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(SEARCH_URL)
-				.queryParam("q", artistAlbumquery)
-				.queryParam("key", "LdWzPkVhbDOqKdugvHFG")
-				.queryParam("secret", "iCfdMwZckWpGOCKWKqBaJcWHYhnWyxHS")
-				.build().toString();
-
-			log.info("This url was build:" + url);
-			List<Result> response = restTemplate.exchange(url,
-					HttpMethod
-							.GET, entity,
-					ArtistRecordsModel.class).getBody().getResults();
-			return response;
-
-	}
-
-
-	private String buildUrl(String releaseId) {
-		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(RELEASES_URL).pathSegment(releaseId).build()
-				.toString();
 		log.info("This url was build: " + url);
 		return url;
+
+	}
+
+	private void simulateSlowService() {
+		try {
+			long time = 1500L;
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 }

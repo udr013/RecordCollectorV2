@@ -4,6 +4,7 @@ package com.udr013.discogs_rest_client.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,7 +12,7 @@ import java.util.List;
     "pagination",
     "results"
 })
-public class ArtistRecordsModel{
+public class PageModel{
 
     @JsonProperty("pagination")
     private Pagination pagination;
