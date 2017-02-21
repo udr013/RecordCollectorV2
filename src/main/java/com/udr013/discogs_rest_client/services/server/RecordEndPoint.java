@@ -1,5 +1,6 @@
 package com.udr013.discogs_rest_client.services.server;
 
+import com.udr013.discogs_rest_client.models.CollectionModel;
 import com.udr013.discogs_rest_client.models.PageModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
@@ -85,7 +86,21 @@ public class RecordEndPoint {
 		return rating;
 	}
 
-	@Cacheable("Release")
+	@GetMapping("/users/{username}/collection")
+	public CollectionModel getUserCollection(@PathVariable("username") String username,
+									   @RequestParam(required = false, value = "page") String page,
+									   @RequestParam(required = false, value = "per_page") String per_page) {
+
+		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null, null, null,
+				null, page, per_page);
+
+		CollectionModel rating = discogsApiClient.getUserCollection(username, queryparams);
+		return rating;
+	}
+
+
+	@Cacheable("CollectionReleaseModel")
 	@GetMapping("/search")
 	public PageModel getRecords(@RequestParam(required = false, value = "artistAlbumquery") String artistAlbumquery,
 								@RequestParam(required = false, value = "query") String query,

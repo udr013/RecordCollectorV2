@@ -3,38 +3,28 @@ package com.udr013.discogs_rest_client.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({
-    "pagination",
-    "results"
-})
 public class PageModel{
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+    private PaginationModel paginationModel;
     @JsonProperty("results")
     private List<Result> results = null;
 
-    @JsonProperty("pagination")
-    public Pagination getPagination() {
-        return pagination;
+    public PaginationModel getPaginationModel() {
+        return paginationModel;
     }
 
-    @JsonProperty("pagination")
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
+    public void setPaginationModel(PaginationModel paginationModel) {
+        this.paginationModel = paginationModel;
     }
 
-    @JsonProperty("results")
     public List<Result> getResults() {
         return results;
     }
 
-    @JsonProperty("results")
     public void setResults(List<Result> results) {
         this.results = results;
     }

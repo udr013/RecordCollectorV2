@@ -1,6 +1,7 @@
 package com.udr013.discogs_rest_client.services.client;
 
 
+import com.udr013.discogs_rest_client.models.CollectionModel;
 import com.udr013.discogs_rest_client.models.PageModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
@@ -22,6 +23,7 @@ public class DiscogsApiClient {
 	private static final String SEARCH_URL = "/database/search";
 	private static final String RELEASES_URL = "releases";
 	private static final String RATING_URL = "/rating";
+	private static final String COLLECTION_URL = "/users/{username}/collection";
 	private static final String CONTENT_TYPE = "application/vnd.discogs.v2.discogs+json";
 	private static final String USER_AGENT = "user-agent";
 	private static final String USER_AGENT_NAME = "discogs_rest_client";
@@ -42,7 +44,7 @@ public class DiscogsApiClient {
 
 	public PageModel findReleaseBy(MultiValueMap<String, String> params) {
 
-		String url = buildUrl(SEARCH_URL, params, null, null);
+		String url = buildUrl(SEARCH_URL, params, null, null, null);
 		PageModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageModel.class).getBody();
 
 		return response;
@@ -51,7 +53,7 @@ public class DiscogsApiClient {
 
 	public ReleaseModel getRelease(MultiValueMap<String, String> params) {
 
-		String url = buildUrl(RELEASES_URL, params, null, null);
+		String url = buildUrl(RELEASES_URL, params, null, null, null);
 		ReleaseModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ReleaseModel.class).getBody();
 
 		return response;
@@ -60,7 +62,7 @@ public class DiscogsApiClient {
 
 	public RatingExtendedModel getReleaseRating(String releaseId) {
 
-		String url = buildUrl(RELEASES_URL, null, releaseId, null);
+		String url = buildUrl(RELEASES_URL, null, releaseId, null, null);
 		RatingExtendedModel response = restTemplate.exchange(url, HttpMethod.GET, entity, RatingExtendedModel.class)
 				.getBody();
 
@@ -68,7 +70,18 @@ public class DiscogsApiClient {
 
 	}
 
-	private String buildUrl(String endpoint, MultiValueMap<String, String> params, String releaseId, String rating) {
+	public CollectionModel getUserCollection(String username, MultiValueMap<String, String> queryparams) {
+		// String url = buildUrl(COLLECTION_URL, queryparams, null, null, username);
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).queryParams(queryparams).path(COLLECTION_URL).buildAndExpand(username).toString();
+
+		log.info("This url was build: " + url);
+		CollectionModel response = restTemplate.exchange(url, HttpMethod.GET, entity, CollectionModel.class).getBody();
+
+		return response;
+	}
+
+	private String buildUrl(String endpoint, MultiValueMap<String, String> params, String releaseId, String rating,
+			String username) {
 
 		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(endpoint).build().toString();
 		if (releaseId == null) {
@@ -91,5 +104,4 @@ public class DiscogsApiClient {
 			throw new IllegalStateException(e);
 		}
 	}
-
 }
