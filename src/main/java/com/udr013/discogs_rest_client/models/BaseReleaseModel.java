@@ -15,12 +15,12 @@ public class BaseReleaseModel {
 
 		private String title;
 
-		private List<ArtistModel> artists;
+		private List<ArtistExtendedModel> artists;
 
 		private List<CompanyModel> labels;
+
 		private List<FormatModel> formats;
 
-		@JsonProperty("thumb")
 		private String thumbnail;
 
 		private Integer year;
@@ -37,7 +37,7 @@ public class BaseReleaseModel {
 			return title;
 		}
 
-		public List<ArtistModel> getArtists() {
+		public List<ArtistExtendedModel> getArtists() {
 			return artists;
 		}
 

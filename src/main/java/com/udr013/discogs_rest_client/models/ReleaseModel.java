@@ -28,7 +28,7 @@ public class ReleaseModel extends BaseReleaseModel {
     private double estimatedWeight;
 
     @JsonProperty("extraartists")
-    private List<ArtistModel> extraArtists;
+    private List<ArtistExtendedModel> extraArtists;
 
     @JsonProperty("format_quantity")
     private int formatQuantity;
@@ -126,11 +126,11 @@ public class ReleaseModel extends BaseReleaseModel {
         this.estimatedWeight = estimatedWeight;
     }
 
-    public List<ArtistModel> getExtraArtists() {
+    public List<ArtistExtendedModel> getExtraArtists() {
         return extraArtists;
     }
 
-    public void setExtraArtists(List<ArtistModel> extraArtists) {
+    public void setExtraArtists(List<ArtistExtendedModel> extraArtists) {
         this.extraArtists = extraArtists;
     }
 

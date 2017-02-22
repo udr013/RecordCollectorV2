@@ -11,13 +11,10 @@ public class PaginationModel{
 
     @JsonProperty("per_page")
     private Integer perPage;
-    @JsonProperty("pages")
     private Integer pages;
-    @JsonProperty("page")
     private Integer page;
     @JsonProperty("urls")
     private UrlsModel urlsModel;
-    @JsonProperty("items")
     private Integer items;
 
     public Integer getPerPage() {

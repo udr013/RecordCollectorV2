@@ -9,9 +9,10 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageModel{
 
+    @JsonProperty("Pagination")
     private PaginationModel paginationModel;
     @JsonProperty("results")
-    private List<Result> results = null;
+    private List<ResultModel> resultModels = null;
 
     public PaginationModel getPaginationModel() {
         return paginationModel;
@@ -21,12 +22,12 @@ public class PageModel{
         this.paginationModel = paginationModel;
     }
 
-    public List<Result> getResults() {
-        return results;
+    public List<ResultModel> getResultModels() {
+        return resultModels;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setResultModels(List<ResultModel> resultModels) {
+        this.resultModels = resultModels;
     }
 
 }

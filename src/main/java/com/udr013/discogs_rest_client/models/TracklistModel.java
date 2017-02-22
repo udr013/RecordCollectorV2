@@ -10,7 +10,7 @@ public class TracklistModel {
     private String duration;
     private String position;
     private String type;
-    private List<ExtraartistModel> extraartistModels = null;
+    private List<ArtistModel> artistModels = null;
     private String title;
 
     public String getDuration() {
@@ -37,12 +37,12 @@ public class TracklistModel {
         this.type = type;
     }
 
-    public List<ExtraartistModel> getExtraartistModels() {
-        return extraartistModels;
+    public List<ArtistModel> getArtistModels() {
+        return artistModels;
     }
 
-    public void setExtraartistModels(List<ExtraartistModel> extraartistModels) {
-        this.extraartistModels = extraartistModels;
+    public void setArtistModels(List<ArtistModel> ArtistModels) {
+        this.artistModels = ArtistModels;
     }
 
     public String getTitle() {

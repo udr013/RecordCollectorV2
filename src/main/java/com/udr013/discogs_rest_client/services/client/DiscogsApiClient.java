@@ -51,9 +51,9 @@ public class DiscogsApiClient {
 
 	}
 
-	public ReleaseModel getRelease(MultiValueMap<String, String> params) {
-
-		String url = buildUrl(RELEASES_URL, params, null, null, null);
+	public ReleaseModel getRelease(MultiValueMap<String, String> params, String recordId) {
+//		String url = buildUrl(RELEASES_URL, params, recordId, null, null);
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(RELEASES_URL).queryParams(params).pathSegment(recordId).build().toString();
 		ReleaseModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ReleaseModel.class).getBody();
 
 		return response;
@@ -88,7 +88,8 @@ public class DiscogsApiClient {
 			url = UriComponentsBuilder.fromHttpUrl(url).queryParams(params).build().toString();
 
 		} else {
-			url = UriComponentsBuilder.fromHttpUrl(url).pathSegment(releaseId).path(RATING_URL).build().toString();
+				url = UriComponentsBuilder.fromHttpUrl(url).pathSegment(releaseId).path(RATING_URL).build().toString();
+
 		}
 
 		log.info("This url was build: " + url);

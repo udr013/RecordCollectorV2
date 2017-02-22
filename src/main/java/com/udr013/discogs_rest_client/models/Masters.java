@@ -9,7 +9,7 @@ public class Masters {
 
     private List<String> styles = null;
     private List<VideoModel> videos = null;
-    private List<ArtistModel> artists = null;
+    private List<ArtistExtendedModel> artists = null;
     private String versionsUrl;
     private Integer year;
     private List<ImageModel> images = null;
@@ -41,11 +41,11 @@ public class Masters {
         this.videos = videos;
     }
 
-    public List<ArtistModel> getArtists() {
+    public List<ArtistExtendedModel> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<ArtistModel> artists) {
+    public void setArtists(List<ArtistExtendedModel> artists) {
         this.artists = artists;
     }
 

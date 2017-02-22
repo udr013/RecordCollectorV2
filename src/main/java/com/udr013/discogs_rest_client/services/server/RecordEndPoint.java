@@ -61,19 +61,17 @@ public class RecordEndPoint {
 	}
 
 
-	@GetMapping
-	public ReleaseModel getRecord(@RequestParam("recordid") String recordid,
+	@GetMapping("/{recordid}")
+	public ReleaseModel getRecord(@PathVariable("recordid") String recordid,
 			@RequestParam(required = false, value = "curr_abbr") String curr_abbr) {
 
 		LOGGER.info("Entered getRecord, and we call the client with id: " + recordid);
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		if (recordid != null)
-			params.add(RECORDID, recordid);
 		if (curr_abbr != null)
 			params.add(CURR_ABBR, curr_abbr);
 
-		ReleaseModel releaseModel = discogsApiClient.getRelease(params);
+		ReleaseModel releaseModel = discogsApiClient.getRelease(params, recordid);
 		return releaseModel;
 	}
 

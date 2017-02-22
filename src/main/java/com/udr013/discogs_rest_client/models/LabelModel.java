@@ -2,15 +2,19 @@
 package com.udr013.discogs_rest_client.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LabelModel {
 
     private String name;
+    @JsonProperty("entity_type")
     private String entityType;
     private String catno;
+    @JsonProperty("resource_url")
     private String resourceUrl;
-    private int id;
+    private Integer id;
+    @JsonProperty("entity_type_name")
     private String entityTypeName;
 
     public String getName() {

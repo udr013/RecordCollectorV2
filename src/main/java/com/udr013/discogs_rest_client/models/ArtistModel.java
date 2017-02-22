@@ -1,38 +1,27 @@
 
 package com.udr013.discogs_rest_client.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class ArtistModel {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ArtistModel{
 
-    private String profile;
-    private String releasesUrl;
+    private String join;
     private String name;
-    private String uri;
-    private List<MemberModel> memberModels = null;
-    private List<String> urls = null;
-    private List<ImageModel> imageModels = null;
+    private String anv;
+    private String tracks;
+    private String role;
+    @JsonProperty("resource_url")
     private String resourceUrl;
     private Integer id;
-    private String dataQuality;
-    private List<String> namevariations = null;
 
-    public String getProfile() {
-        return profile;
+    public String getJoin() {
+        return join;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public String getReleasesUrl() {
-        return releasesUrl;
-    }
-
-    public void setReleasesUrl(String releasesUrl) {
-        this.releasesUrl = releasesUrl;
+    public void setJoin(String join) {
+        this.join = join;
     }
 
     public String getName() {
@@ -43,36 +32,28 @@ public class ArtistModel {
         this.name = name;
     }
 
-    public String getUri() {
-        return uri;
+    public String getAnv() {
+        return anv;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setAnv(String anv) {
+        this.anv = anv;
     }
 
-    public List<MemberModel> getMemberModels() {
-        return memberModels;
+    public String getTracks() {
+        return tracks;
     }
 
-    public void setMemberModels(List<MemberModel> memberModels) {
-        this.memberModels = memberModels;
+    public void setTracks(String tracks) {
+        this.tracks = tracks;
     }
 
-    public List<String> getUrls() {
-        return urls;
+    public String getRole() {
+        return role;
     }
 
-    public void setUrls(List<String> urls) {
-        this.urls = urls;
-    }
-
-    public List<ImageModel> getImageModels() {
-        return imageModels;
-    }
-
-    public void setImageModels(List<ImageModel> imageModels) {
-        this.imageModels = imageModels;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getResourceUrl() {
@@ -89,22 +70,6 @@ public class ArtistModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDataQuality() {
-        return dataQuality;
-    }
-
-    public void setDataQuality(String dataQuality) {
-        this.dataQuality = dataQuality;
-    }
-
-    public List<String> getNamevariations() {
-        return namevariations;
-    }
-
-    public void setNamevariations(List<String> namevariations) {
-        this.namevariations = namevariations;
     }
 
 }
