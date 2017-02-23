@@ -2,6 +2,7 @@
 package com.udr013.discogs_rest_client.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,8 +10,10 @@ public class TracklistModel {
 
     private String duration;
     private String position;
+    @JsonProperty("type_")
     private String type;
-    private List<ArtistModel> artistModels = null;
+    @JsonProperty("artists")
+    private List<ArtistModel> artists = null;
     private String title;
 
     public String getDuration() {
@@ -38,11 +41,11 @@ public class TracklistModel {
     }
 
     public List<ArtistModel> getArtistModels() {
-        return artistModels;
+        return artists;
     }
 
-    public void setArtistModels(List<ArtistModel> ArtistModels) {
-        this.artistModels = ArtistModels;
+    public void setArtistModels(List<ArtistModel> Artists) {
+        this.artists = Artists;
     }
 
     public String getTitle() {

@@ -1,7 +1,10 @@
 package com.udr013.discogs_rest_client.services.client;
 
 
+import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
 import com.udr013.discogs_rest_client.models.CollectionModel;
+import com.udr013.discogs_rest_client.models.LabelModel;
+import com.udr013.discogs_rest_client.models.PageLabelModel;
 import com.udr013.discogs_rest_client.models.PageModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
@@ -21,12 +24,16 @@ public class DiscogsApiClient {
 
 	private static final String BASE_URL = "https://api.discogs.com/";
 	private static final String SEARCH_URL = "/database/search";
-	private static final String RELEASES_URL = "releases";
+	private static final String RELEASES_PATH = "/releases";
+	private static final String ARTIST_PATH = "/artists/{artistid}";
+	private static final String ARTIST_RELEASE_PATH = ARTIST_PATH + RELEASES_PATH;
 	private static final String RATING_URL = "/rating";
 	private static final String COLLECTION_URL = "/users/{username}/collection";
 	private static final String CONTENT_TYPE = "application/vnd.discogs.v2.discogs+json";
 	private static final String USER_AGENT = "user-agent";
 	private static final String USER_AGENT_NAME = "discogs_rest_client";
+	private static final String LABEL_PATH = "/labels/{labelid}";
+	private static final String LABEL_RELEASE_PATH = LABEL_PATH + RELEASES_PATH ;
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -53,7 +60,7 @@ public class DiscogsApiClient {
 
 	public ReleaseModel getRelease(MultiValueMap<String, String> params, String recordId) {
 //		String url = buildUrl(RELEASES_URL, params, recordId, null, null);
-		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(RELEASES_URL).queryParams(params).pathSegment(recordId).build().toString();
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(RELEASES_PATH).queryParams(params).pathSegment(recordId).build().toString();
 		ReleaseModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ReleaseModel.class).getBody();
 
 		return response;
@@ -62,12 +69,62 @@ public class DiscogsApiClient {
 
 	public RatingExtendedModel getReleaseRating(String releaseId) {
 
-		String url = buildUrl(RELEASES_URL, null, releaseId, null, null);
+		String url = buildUrl(RELEASES_PATH, null, releaseId, null, null);
 		RatingExtendedModel response = restTemplate.exchange(url, HttpMethod.GET, entity, RatingExtendedModel.class)
 				.getBody();
 
 		return response;
 
+	}
+
+	public LabelModel getLabel(String labelid, MultiValueMap<String, String> queryparams){
+
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(LABEL_PATH).buildAndExpand(labelid).toString();
+		log.info("This url was build: " + url);
+		LabelModel response = restTemplate.exchange(url, HttpMethod.GET, entity, LabelModel.class)
+				.getBody();
+
+		return response;
+
+	}
+
+	public ArtistFullExtendedModel getArtist(String artistid, MultiValueMap<String, String> queryparams){
+
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(ARTIST_PATH).buildAndExpand(artistid).toString();
+		log.info("This url was build: " + url);
+		ArtistFullExtendedModel response = restTemplate.exchange(url, HttpMethod.GET, entity, ArtistFullExtendedModel.class)
+				.getBody();
+
+		return response;
+
+	}
+
+	public PageLabelModel getAllLabelReleases(String labelid, MultiValueMap<String, String> params) {
+
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).queryParams(params).path(LABEL_RELEASE_PATH).buildAndExpand(labelid).toString();
+		log.info("This url was build: " + url);
+		PageLabelModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageLabelModel.class).getBody();
+		log.info("This url was build: " + url);
+		return response;
+
+	}
+
+	public PageLabelModel getAllArtistReleases(String artistid, MultiValueMap<String, String> params) {
+
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).queryParams(params).path(ARTIST_RELEASE_PATH).buildAndExpand(artistid).toString();
+		log.info("This url was build: " + url);
+		PageLabelModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageLabelModel.class).getBody();
+		return response;
+
+	}
+
+	public CollectionModel getCollectionValue(String username){
+		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(COLLECTION_URL).buildAndExpand(username).toString();
+		url = UriComponentsBuilder.fromUriString(url).path("/value").build().toString();
+		log.info("This url was build: " + url);
+		CollectionModel response = restTemplate.exchange(url, HttpMethod.GET, entity, CollectionModel.class).getBody();
+
+		return response;
 	}
 
 	public CollectionModel getUserCollection(String username, MultiValueMap<String, String> queryparams) {
@@ -105,4 +162,5 @@ public class DiscogsApiClient {
 			throw new IllegalStateException(e);
 		}
 	}
+
 }

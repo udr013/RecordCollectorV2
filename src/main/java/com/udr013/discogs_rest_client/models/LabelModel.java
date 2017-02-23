@@ -1,68 +1,36 @@
 
 package com.udr013.discogs_rest_client.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+import java.util.List;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class LabelModel {
 
-    private String name;
-    @JsonProperty("entity_type")
-    private String entityType;
-    private String catno;
+    @JsonProperty("profile")
+    public String profile;
+    @JsonProperty("releases_url")
+    public String releasesUrl;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("contact_info")
+    public String contactInfo;
+    @JsonProperty("uri")
+    public String uri;
+    @JsonProperty("sublabels")
+    public List<Sublabel> sublabels = null;
+    @JsonProperty("urls")
+    public List<String> urls = null;
+    @JsonProperty("images")
+    public List<ImageModel> images = null;
     @JsonProperty("resource_url")
-    private String resourceUrl;
-    private Integer id;
-    @JsonProperty("entity_type_name")
-    private String entityTypeName;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEntityType() {
-        return entityType;
-    }
-
-    public void setEntityType(String entityType) {
-        this.entityType = entityType;
-    }
-
-    public String getCatno() {
-        return catno;
-    }
-
-    public void setCatno(String catno) {
-        this.catno = catno;
-    }
-
-    public String getResourceUrl() {
-        return resourceUrl;
-    }
-
-    public void setResourceUrl(String resourceUrl) {
-        this.resourceUrl = resourceUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEntityTypeName() {
-        return entityTypeName;
-    }
-
-    public void setEntityTypeName(String entityTypeName) {
-        this.entityTypeName = entityTypeName;
-    }
+    public String resourceUrl;
+    @JsonProperty("id")
+    public Integer id;
+    @JsonProperty("data_quality")
+    public String dataQuality;
 
 }

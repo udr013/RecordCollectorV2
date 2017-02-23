@@ -9,7 +9,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageModel{
 
-    @JsonProperty("Pagination")
+    @JsonProperty("pagination")
     private PaginationModel paginationModel;
     @JsonProperty("results")
     private List<ResultModel> resultModels = null;

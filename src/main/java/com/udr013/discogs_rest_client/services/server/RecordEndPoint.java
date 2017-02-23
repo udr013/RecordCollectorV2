@@ -1,6 +1,9 @@
 package com.udr013.discogs_rest_client.services.server;
 
+import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
 import com.udr013.discogs_rest_client.models.CollectionModel;
+import com.udr013.discogs_rest_client.models.LabelModel;
+import com.udr013.discogs_rest_client.models.PageLabelModel;
 import com.udr013.discogs_rest_client.models.PageModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
@@ -84,6 +87,12 @@ public class RecordEndPoint {
 		return rating;
 	}
 
+	@GetMapping("/users/{username}/collection/value")
+	public CollectionModel getCollectionValue(@PathVariable("username") String username) {
+		CollectionModel rating = discogsApiClient.getCollectionValue(username);
+		return rating;
+	}
+
 	@GetMapping("/users/{username}/collection")
 	public CollectionModel getUserCollection(@PathVariable("username") String username,
 									   @RequestParam(required = false, value = "page") String page,
@@ -97,6 +106,55 @@ public class RecordEndPoint {
 		return rating;
 	}
 
+	@GetMapping("/label/{labelid}")
+	public LabelModel getLabel(@PathVariable("labelid") String labelid,
+			@RequestParam(required = false, value = "page") String page,
+			@RequestParam(required = false, value = "per_page") String per_page) {
+
+		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null, page, per_page);
+
+		LabelModel rating = discogsApiClient.getLabel(labelid, queryparams);
+		return rating;
+	}
+
+	@GetMapping("/artist/{artistid}")
+	public ArtistFullExtendedModel getArtist(@PathVariable("artistid") String labelid,
+			@RequestParam(required = false, value = "page") String page,
+			@RequestParam(required = false, value = "per_page") String per_page) {
+		System.out.println("artist is called with id");
+		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null, page, per_page);
+
+		ArtistFullExtendedModel rating = discogsApiClient.getArtist(labelid, queryparams);
+		return rating;
+	}
+
+	@GetMapping("/label/{labelid}/releases")
+	public PageLabelModel getAllLabelReleases(@PathVariable("labelid") String labelid,
+			@RequestParam(required = false, value = "page") String page,
+			@RequestParam(required = false, value = "per_page") String per_page) {
+		System.out.println("/labelReleaseModels");
+		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null, page, per_page);
+
+		PageLabelModel rating = discogsApiClient.getAllLabelReleases(labelid, queryparams);
+		return rating;
+	}
+
+	@GetMapping("/artist/{artistid}/releases")
+	public PageLabelModel getAllLabelReleases(@PathVariable("artistid") String artistid,
+			@RequestParam(required = false, value = "page") String page,
+			@RequestParam(required = false, value = "per_page") String per_page,
+			@RequestParam(required = false, value = "sort") String sort,
+			@RequestParam(required = false, value = "sort_order") String sortorder) {
+		System.out.println("/labelReleaseModels");
+		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
+				null, null, null, null, null, null, null, null, null, null, page, per_page);
+
+		PageLabelModel rating = discogsApiClient.getAllArtistReleases(artistid, queryparams);
+		return rating;
+	}
 
 	@Cacheable("CollectionReleaseModel")
 	@GetMapping("/search")

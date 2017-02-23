@@ -10,23 +10,23 @@ import java.util.List;
 public class BasicInformationModel{
 
     @JsonProperty("labels")
-    private List<LabelModel> labels = null;
+    private List<BasicLabelModel> labels = null;
     @JsonProperty("formats")
     private List<FormatModel> formats = null;
     private String thumb;
     private String title;
-    @JsonProperty("artist")
-    private List<ArtistModel> artistModels = null;
+    @JsonProperty("artists")
+    private List<ArtistModel> artists = null;
     @JsonProperty("resource_url")
     private String resourceUrl;
     private Integer year;
     private Integer id;
 
-    public List<LabelModel> getLabels() {
+    public List<BasicLabelModel> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<LabelModel> labels) {
+    public void setLabels(List<BasicLabelModel> labels) {
         this.labels = labels;
     }
 
@@ -55,11 +55,11 @@ public class BasicInformationModel{
     }
 
     public List<ArtistModel> getArtistModels() {
-        return artistModels;
+        return artists;
     }
 
-    public void setArtistModels(List<ArtistModel> artistModels) {
-        this.artistModels = artistModels;
+    public void setArtistModels(List<ArtistModel> artist) {
+        this.artists = artist;
     }
 
     public String getResourceUrl() {
