@@ -10,11 +10,8 @@ public class UrlsModel{
 
 
     private String next;
-
     private String prev;
-
     private String last;
-
     private String first;
 
 

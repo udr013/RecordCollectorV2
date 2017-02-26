@@ -1,59 +1,52 @@
 package com.udr013.discogs_rest_client.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseReleaseModel {
 
-		protected long id;
+	private long id;
+	@JsonProperty("resource_url")
+	private String resourceUrl;
+	private String title;
+	private List<ArtistExtendedModel> artists;
+	private List<CompanyModel> labels;
+	private List<FormatModel> formats;
+	private String thumbnail;
+	private Integer year;
 
-		@JsonProperty("resource_url")
-		protected String resourceUrl;
+	public long getId() {
+		return id;
+	}
 
-		private String title;
+	public String getResourceUrl() {
+		return resourceUrl;
+	}
 
-		private List<ArtistExtendedModel> artists;
+	public String getTitle() {
+		return title;
+	}
 
-		private List<CompanyModel> labels;
+	public List<ArtistExtendedModel> getArtists() {
+		return artists;
+	}
 
-		private List<FormatModel> formats;
+	public List<CompanyModel> getLabels() {
+		return labels;
+	}
 
-		private String thumbnail;
+	public List<FormatModel> getFormats() {
+		return formats;
+	}
 
-		private Integer year;
+	public String getThumbnail() {
+		return thumbnail;
+	}
 
-		public long getId() {
-			return id;
-		}
-
-		public String getResourceUrl() {
-			return resourceUrl;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public List<ArtistExtendedModel> getArtists() {
-			return artists;
-		}
-
-		public List<CompanyModel> getLabels() {
-			return labels;
-		}
-
-		public List<FormatModel> getFormats() {
-			return formats;
-		}
-
-		public String getThumbnail() {
-			return thumbnail;
-		}
-
-		public Integer getYear() {
-			return year;
-		}
+	public Integer getYear() {
+		return year;
+	}
 }

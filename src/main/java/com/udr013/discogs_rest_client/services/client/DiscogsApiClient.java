@@ -4,8 +4,10 @@ package com.udr013.discogs_rest_client.services.client;
 import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
 import com.udr013.discogs_rest_client.models.CollectionModel;
 import com.udr013.discogs_rest_client.models.LabelModel;
+import com.udr013.discogs_rest_client.models.MasterModel;
 import com.udr013.discogs_rest_client.models.PageLabelModel;
 import com.udr013.discogs_rest_client.models.PageModel;
+import com.udr013.discogs_rest_client.models.PageVersionModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
 import org.slf4j.Logger;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
 
 @Service
 public class DiscogsApiClient {
@@ -34,6 +35,8 @@ public class DiscogsApiClient {
 	private static final String ARTIST_RELEASE_PATH = ARTIST_PATH + "/releases";
 	private static final String COLLECTION_PATH = "/users/{username}/collection";
 	private static final String COLLECTION_VALUE_PATH = COLLECTION_PATH + "/value";
+	private static final String MASTER_PATH = "/masters/{master_id}";
+	private static final String MASTER_VERSIONS_PATH = MASTER_PATH +"/versions";
 	private static final String LABEL_PATH = "/labels/{labelid}";
 	private static final String LABEL_RELEASE_PATH = LABEL_PATH + "/releases" ;
 
@@ -87,6 +90,22 @@ public class DiscogsApiClient {
 
 		String url = buildUrl(ARTIST_RELEASE_PATH, params, artistid);
 		PageLabelModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageLabelModel.class).getBody();
+		return response;
+
+	}
+
+	public MasterModel getMaster(String masterid){
+
+		String url = buildUrl(MASTER_PATH, null, masterid);
+		MasterModel response = restTemplate.exchange(url, HttpMethod.GET, entity, MasterModel.class).getBody();
+		return response;
+
+	}
+
+	public PageVersionModel getMasterVersions(String masterid, MultiValueMap<String, String> params) {
+
+		String url = buildUrl(MASTER_VERSIONS_PATH, params, masterid);
+		PageVersionModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageVersionModel.class).getBody();
 		return response;
 
 	}

@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AliasModel {
 
 	@JsonProperty("resource_url")
-	public String resourceUrl;
-	public Integer id;
-	public String name;
+	private String resourceUrl;
+	private Integer id;
+	private String name;
 
 	public String getResourceUrl(){
 		return resourceUrl;

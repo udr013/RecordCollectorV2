@@ -2,20 +2,24 @@
 package com.udr013.discogs_rest_client.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ArtistExtendedModel{
 
     private String profile;
+    @JsonProperty("releases_url")
     private String releasesUrl;
     private String name;
     private String uri;
-    private List<MemberModel> memberModels = null;
+    private List<MemberModel> members = null;
     private List<String> urls = null;
-    private List<ImageModel> imageModels = null;
+    private List<ImageModel> images = null;
+    @JsonProperty("resource_url")
     private String resourceUrl;
     private Integer id;
+    @JsonProperty("data_quality")
     private String dataQuality;
     private List<String> namevariations = null;
 
@@ -51,12 +55,12 @@ public class ArtistExtendedModel{
         this.uri = uri;
     }
 
-    public List<MemberModel> getMemberModels() {
-        return memberModels;
+    public List<MemberModel> getMembers() {
+        return members;
     }
 
-    public void setMemberModels(List<MemberModel> memberModels) {
-        this.memberModels = memberModels;
+    public void setMembers(List<MemberModel> members) {
+        this.members = members;
     }
 
     public List<String> getUrls() {
@@ -67,12 +71,12 @@ public class ArtistExtendedModel{
         this.urls = urls;
     }
 
-    public List<ImageModel> getImageModels() {
-        return imageModels;
+    public List<ImageModel> getImages() {
+        return images;
     }
 
-    public void setImageModels(List<ImageModel> imageModels) {
-        this.imageModels = imageModels;
+    public void setImages(List<ImageModel> images) {
+        this.images = images;
     }
 
     public String getResourceUrl() {

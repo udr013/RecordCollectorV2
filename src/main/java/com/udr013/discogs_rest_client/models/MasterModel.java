@@ -2,27 +2,35 @@
 package com.udr013.discogs_rest_client.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Masters {
+public class MasterModel{
 
     private List<String> styles = null;
     private List<VideoModel> videos = null;
-    private List<ArtistExtendedModel> artists = null;
+    private List<ArtistModel> artists = null;
+    @JsonProperty("versions_url")
     private String versionsUrl;
     private Integer year;
     private List<ImageModel> images = null;
     private Integer id;
     private List<TracklistModel> tracklist = null;
     private List<String> genres = null;
+    @JsonProperty("num_for_sale")
     private Integer numForSale;
     private String title;
+    @JsonProperty("main_release")
     private Integer mainRelease;
+    @JsonProperty("main_release_url")
     private String mainReleaseUrl;
     private String uri;
+    @JsonProperty("resource_url")
     private String resourceUrl;
+    @JsonProperty("lowest_price")
     private Double lowestPrice;
+    @JsonProperty("data_quality")
     private String dataQuality;
 
     public List<String> getStyles() {
@@ -41,11 +49,11 @@ public class Masters {
         this.videos = videos;
     }
 
-    public List<ArtistExtendedModel> getArtists() {
+    public List<ArtistModel> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<ArtistExtendedModel> artists) {
+    public void setArtists(List<ArtistModel> artists) {
         this.artists = artists;
     }
 

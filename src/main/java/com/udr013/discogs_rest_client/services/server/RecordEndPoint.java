@@ -3,8 +3,10 @@ package com.udr013.discogs_rest_client.services.server;
 import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
 import com.udr013.discogs_rest_client.models.CollectionModel;
 import com.udr013.discogs_rest_client.models.LabelModel;
+import com.udr013.discogs_rest_client.models.MasterModel;
 import com.udr013.discogs_rest_client.models.PageLabelModel;
 import com.udr013.discogs_rest_client.models.PageModel;
+import com.udr013.discogs_rest_client.models.PageVersionModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
 import com.udr013.discogs_rest_client.services.client.DiscogsApiClient;
@@ -64,6 +66,7 @@ public class RecordEndPoint {
 		this.discogsApiClient = discogsApiClient;
 	}
 
+	/* allowed currency abbriviations: USD GBP EUR CAD AUD JPY CHF MXN BRL NZD SEK ZAR */
 	@GetMapping("/{recordid}")
 	public ReleaseModel getRecord(@PathVariable("recordid") String recordid,
 			@RequestParam(required = false, value = "curr_abbr") String curr_abbr) {
@@ -80,6 +83,25 @@ public class RecordEndPoint {
 	public RatingExtendedModel getRecordRating(@PathVariable("recordid") String recordid) {
 
 		RatingExtendedModel rating = discogsApiClient.getReleaseRating(recordid);
+		return rating;
+	}
+
+	@GetMapping("/master/{masterid}")
+	public MasterModel getMasterRelease(@PathVariable("masterid") String masterid) {
+
+		MasterModel rating = discogsApiClient.getMaster(masterid);
+		return rating;
+	}
+
+	@GetMapping("/master/{masterid}/versions")
+	public PageVersionModel getMasterReleaseVersions(@PathVariable("masterid") String masterid,
+											  @RequestParam(required = false, value = "page") String page,
+											  @RequestParam(required = false, value = "per_page") String per_page,
+											  @RequestParam(required = false, value = "sort") String sort,
+											  @RequestParam(required = false, value = "sort_order") String sort_order) {
+
+		MultiValueMap<String, String> queryparams = buildPageSortParams(page, per_page, sort, sort_order);
+		PageVersionModel rating = discogsApiClient.getMasterVersions(masterid, queryparams);
 		return rating;
 	}
 
@@ -109,6 +131,10 @@ public class RecordEndPoint {
 		return rating;
 	}
 
+	/* allowed params:
+	* sort = year, title, format
+	* sort_order = asc, desc
+	* */
 	@GetMapping("/artist/{artistid}/releases")
 	public PageLabelModel getAllArtistReleases(@PathVariable("artistid") String artistid,
 			@RequestParam(required = false, value = "page") String page,

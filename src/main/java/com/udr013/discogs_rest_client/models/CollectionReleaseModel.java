@@ -9,13 +9,10 @@ public class CollectionReleaseModel{
 
 
     private Integer collectionId;
-
     private Integer releaseId;
-
     private Integer rating;
     @JsonProperty("basic_information")
     private BasicInformationModel basicInformation;
-
     private String dateAdded;
 
     public Integer getCollectionId() {
