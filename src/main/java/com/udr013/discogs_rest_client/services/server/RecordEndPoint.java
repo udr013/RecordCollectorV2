@@ -46,8 +46,9 @@ public class RecordEndPoint {
 	private static final String CONTRIBUTOR = "contributor";
 	private static final String PER_PAGE = "per_page";
 	private static final String PAGE = "page";
+	private static final String SORT = "sort";
+	private static final String SORT_ORDER = "sort_order";
 	private static final String CURR_ABBR = "curr_abbr";
-	private static final String RECORDID = "recordid";
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -63,12 +64,9 @@ public class RecordEndPoint {
 		this.discogsApiClient = discogsApiClient;
 	}
 
-
 	@GetMapping("/{recordid}")
 	public ReleaseModel getRecord(@PathVariable("recordid") String recordid,
 			@RequestParam(required = false, value = "curr_abbr") String curr_abbr) {
-
-		LOGGER.info("Entered getRecord, and we call the client with id: " + recordid);
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		if (curr_abbr != null)
@@ -81,9 +79,46 @@ public class RecordEndPoint {
 	@GetMapping("/rating/{recordid}")
 	public RatingExtendedModel getRecordRating(@PathVariable("recordid") String recordid) {
 
-		LOGGER.info("Entered rating with id: " + recordid);
-
 		RatingExtendedModel rating = discogsApiClient.getReleaseRating(recordid);
+		return rating;
+	}
+
+	@GetMapping("/label/{labelid}")
+	public LabelModel getLabel(@PathVariable("labelid") String labelid) {
+
+		LabelModel rating = discogsApiClient.getLabel(labelid);
+		return rating;
+	}
+
+	@GetMapping("/label/{labelid}/releases")
+	public PageLabelModel getAllLabelReleases(@PathVariable("labelid") String labelid,
+											  @RequestParam(required = false, value = "page") String page,
+											  @RequestParam(required = false, value = "per_page") String per_page,
+											  @RequestParam(required = false, value = "sort") String sort,
+											  @RequestParam(required = false, value = "sort_order") String sort_order) {
+		System.out.println("/labelReleaseModels");
+		MultiValueMap<String, String> queryparams = buildPageSortParams(page, per_page, sort, sort_order);
+		PageLabelModel rating = discogsApiClient.getAllLabelReleases(labelid, queryparams);
+		return rating;
+	}
+
+	@GetMapping("/artist/{artistid}")
+	public ArtistFullExtendedModel getArtist(@PathVariable("artistid") String labelid) {
+		System.out.println("artist is called with id");
+		ArtistFullExtendedModel rating = discogsApiClient.getArtist(labelid);
+		return rating;
+	}
+
+	@GetMapping("/artist/{artistid}/releases")
+	public PageLabelModel getAllArtistReleases(@PathVariable("artistid") String artistid,
+			@RequestParam(required = false, value = "page") String page,
+			@RequestParam(required = false, value = "per_page") String per_page,
+			@RequestParam(required = false, value = "sort") String sort,
+			@RequestParam(required = false, value = "sort_order") String sort_order) {
+
+		MultiValueMap<String, String> queryparams = buildPageSortParams(page, per_page, sort, sort_order);
+
+		PageLabelModel rating = discogsApiClient.getAllArtistReleases(artistid, queryparams);
 		return rating;
 	}
 
@@ -93,107 +128,74 @@ public class RecordEndPoint {
 		return rating;
 	}
 
+	@Cacheable("Coll_Cache")
 	@GetMapping("/users/{username}/collection")
 	public CollectionModel getUserCollection(@PathVariable("username") String username,
-									   @RequestParam(required = false, value = "page") String page,
-									   @RequestParam(required = false, value = "per_page") String per_page) {
+											 @RequestParam(required = false, value = "page") String page,
+											 @RequestParam(required = false, value = "per_page") String per_page,
+											 @RequestParam(required = false, value = "sort") String sort,
+											 @RequestParam(required = false, value = "sort_order") String sort_order) {
 
-		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null,
-				null, null, null, null, null, null, null, null, null, null, null, null,
-				null, page, per_page);
-
+		MultiValueMap<String, String> queryparams = buildPageSortParams(page, per_page, sort, sort_order);
 		CollectionModel rating = discogsApiClient.getUserCollection(username, queryparams);
 		return rating;
 	}
 
-	@GetMapping("/label/{labelid}")
-	public LabelModel getLabel(@PathVariable("labelid") String labelid,
-			@RequestParam(required = false, value = "page") String page,
-			@RequestParam(required = false, value = "per_page") String per_page) {
-
-		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
-				null, null, null, null, null, null, null, null, null, null, page, per_page);
-
-		LabelModel rating = discogsApiClient.getLabel(labelid, queryparams);
-		return rating;
-	}
-
-	@GetMapping("/artist/{artistid}")
-	public ArtistFullExtendedModel getArtist(@PathVariable("artistid") String labelid,
-			@RequestParam(required = false, value = "page") String page,
-			@RequestParam(required = false, value = "per_page") String per_page) {
-		System.out.println("artist is called with id");
-		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
-				null, null, null, null, null, null, null, null, null, null, page, per_page);
-
-		ArtistFullExtendedModel rating = discogsApiClient.getArtist(labelid, queryparams);
-		return rating;
-	}
-
-	@GetMapping("/label/{labelid}/releases")
-	public PageLabelModel getAllLabelReleases(@PathVariable("labelid") String labelid,
-			@RequestParam(required = false, value = "page") String page,
-			@RequestParam(required = false, value = "per_page") String per_page) {
-		System.out.println("/labelReleaseModels");
-		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
-				null, null, null, null, null, null, null, null, null, null, page, per_page);
-
-		PageLabelModel rating = discogsApiClient.getAllLabelReleases(labelid, queryparams);
-		return rating;
-	}
-
-	@GetMapping("/artist/{artistid}/releases")
-	public PageLabelModel getAllLabelReleases(@PathVariable("artistid") String artistid,
+	@GetMapping("/search")
+	public PageModel getRecords(@RequestParam(required = false, value = "artistAlbumquery") String artistAlbumquery,
+			@RequestParam(required = false, value = "query") String query,
+			@RequestParam(required = false, value = "type") String type,
+			@RequestParam(required = false, value = "title") String title,
+			@RequestParam(required = false, value = "artist") String artist,
+			@RequestParam(required = false, value = "release_title") String release_title,
+			@RequestParam(required = false, value = "anv") String anv,
+			@RequestParam(required = false, value = "label") String label,
+			@RequestParam(required = false, value = "genre") String genre,
+			@RequestParam(required = false, value = "style") String style,
+			@RequestParam(required = false, value = "country") String country,
+			@RequestParam(required = false, value = "year") String year,
+			@RequestParam(required = false, value = "format") String format,
+			@RequestParam(required = false, value = "catno") String catno,
+			@RequestParam(required = false, value = "barcode") String barcode,
+			@RequestParam(required = false, value = "track") String track,
+			@RequestParam(required = false, value = "submitter") String submitter,
+			@RequestParam(required = false, value = "contributor") String contributor,
 			@RequestParam(required = false, value = "page") String page,
 			@RequestParam(required = false, value = "per_page") String per_page,
 			@RequestParam(required = false, value = "sort") String sort,
-			@RequestParam(required = false, value = "sort_order") String sortorder) {
-		System.out.println("/labelReleaseModels");
-		MultiValueMap<String, String> queryparams = buildQueryParams(null, null, null, null, null, null, null, null,
-				null, null, null, null, null, null, null, null, null, null, page, per_page);
+			@RequestParam(required = false, value = "sort_order") String sort_order) {
 
-		PageLabelModel rating = discogsApiClient.getAllArtistReleases(artistid, queryparams);
-		return rating;
-	}
-
-	@Cacheable("CollectionReleaseModel")
-	@GetMapping("/search")
-	public PageModel getRecords(@RequestParam(required = false, value = "artistAlbumquery") String artistAlbumquery,
-								@RequestParam(required = false, value = "query") String query,
-								@RequestParam(required = false, value = "type") String type,
-								@RequestParam(required = false, value = "title") String title,
-								@RequestParam(required = false, value = "artist") String artist,
-								@RequestParam(required = false, value = "release_title") String release_title,
-								@RequestParam(required = false, value = "anv") String anv,
-								@RequestParam(required = false, value = "label") String label,
-								@RequestParam(required = false, value = "genre") String genre,
-								@RequestParam(required = false, value = "style") String style,
-								@RequestParam(required = false, value = "country") String country,
-								@RequestParam(required = false, value = "year") String year,
-								@RequestParam(required = false, value = "format") String format,
-								@RequestParam(required = false, value = "catno") String catno,
-								@RequestParam(required = false, value = "barcode") String barcode,
-								@RequestParam(required = false, value = "track") String track,
-								@RequestParam(required = false, value = "submitter") String submitter,
-								@RequestParam(required = false, value = "contributor") String contributor,
-								@RequestParam(required = false, value = "page") String page,
-								@RequestParam(required = false, value = "per_page") String per_page){
-
-
-		MultiValueMap<String, String> queryparams = buildQueryParams(artistAlbumquery, query, title, type, artist,
+		MultiValueMap<String, String> queryparams = buildSearchQueryParams(artistAlbumquery, query, title, type, artist,
 				release_title, anv, label, genre, style, country, year, format, catno, barcode, track, submitter,
-				contributor, page, per_page);
+				contributor, page, per_page, sort_order, sort);
 
 		LOGGER.info("Entered getRecord, and we call the client with: " + queryparams.size() + "params");
 
-		return discogsApiClient.findReleaseBy(queryparams);
+		return discogsApiClient.search(queryparams);
 	}
 
+	private MultiValueMap<String, String> buildPageSortParams(String page, String per_page, String sort, String sort_order){
 
-	private MultiValueMap<String, String> buildQueryParams(String artistAlbumquery, String query, String type,
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add(KEY, KEY_VALUE);
+		params.add(SECRET, SECRET_VALUE);
+		if (page != null)
+			params.add(PAGE, page);
+		if (per_page != null)
+			params.add(PER_PAGE, per_page);
+		if (sort != null)
+			params.add(SORT, sort);
+		if (sort_order != null)
+			params.add(SORT_ORDER, sort_order);
+
+		return params;
+
+	}
+
+	private MultiValueMap<String, String> buildSearchQueryParams(String artistAlbumquery, String query, String type,
 			String title, String artist, String release_title, String anv, String label, String genre, String style,
 			String country, String year, String format, String catno, String barcode, String track, String submitter,
-			String contributor, String page, String per_page) {
+			String contributor, String page, String per_page, String sort, String sort_order) {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add(KEY, KEY_VALUE);
@@ -236,6 +238,10 @@ public class RecordEndPoint {
 			params.add(PAGE, page);
 		if (per_page != null)
 			params.add(PER_PAGE, per_page);
+		if (sort != null)
+			params.add(SORT, sort);
+		if (sort_order != null)
+			params.add(SORT_ORDER, sort_order);
 
 		return params;
 	}
