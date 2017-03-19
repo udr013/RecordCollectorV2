@@ -39,20 +39,25 @@ public class DiscogsApiClient {
 	private static final String MASTER_VERSIONS_PATH = MASTER_PATH +"/versions";
 	private static final String LABEL_PATH = "/labels/{labelid}";
 	private static final String LABEL_RELEASE_PATH = LABEL_PATH + "/releases" ;
+	private static final String DISCOGS_TOKEN = "Discogs token=vhQqTYuspRRyBhWyzppgjJcMpQEgLezqkWwFiDgn";
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private static HttpHeaders defaultHeaders;
 
-	private HttpEntity entity = new HttpEntity<>("parameters", defaultHeaders);
-
 	private RestTemplate restTemplate = new RestTemplate();
+//
+//	@Value("${discogs.token}")
+//	private static String DISCOGS_TOKEN;
 
 	static {
 		defaultHeaders = new HttpHeaders();
 		defaultHeaders.set(HttpHeaders.ACCEPT, CONTENT_TYPE);
 		defaultHeaders.set(USER_AGENT, USER_AGENT_NAME);
+		defaultHeaders.set(HttpHeaders.AUTHORIZATION, DISCOGS_TOKEN);
 	}
+
+	private HttpEntity entity = new HttpEntity<>("parameters", defaultHeaders);
 
 	public PageModel search(MultiValueMap<String, String> params) {
 

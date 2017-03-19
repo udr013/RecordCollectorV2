@@ -13,7 +13,6 @@ import com.udr013.discogs_rest_client.services.client.DiscogsApiClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -56,10 +55,10 @@ public class RecordEndPoint {
 
 	private final DiscogsApiClient discogsApiClient;
 
-	@Value("${discogs.key.value}")
-	private String KEY_VALUE;
-	@Value("${discogs.secret.value}")
-	private String SECRET_VALUE;
+//	@Value("${discogs.key.value}")
+//	private String KEY_VALUE;
+//	@Value("${discogs.secret.value}")
+//	private String SECRET_VALUE;
 
 	@Autowired
 	public RecordEndPoint(DiscogsApiClient discogsApiClient) {
@@ -203,8 +202,8 @@ public class RecordEndPoint {
 	private MultiValueMap<String, String> buildPageSortParams(String page, String per_page, String sort, String sort_order){
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add(KEY, KEY_VALUE);
-		params.add(SECRET, SECRET_VALUE);
+//		params.add(KEY, KEY_VALUE);
+//		params.add(SECRET, SECRET_VALUE);
 		if (page != null)
 			params.add(PAGE, page);
 		if (per_page != null)
@@ -224,8 +223,8 @@ public class RecordEndPoint {
 			String contributor, String page, String per_page, String sort, String sort_order) {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add(KEY, KEY_VALUE);
-		params.add(SECRET, SECRET_VALUE);
+//		params.add(KEY, KEY_VALUE);
+//		params.add(SECRET, SECRET_VALUE);
 		if (query != null)
 			params.add(Q, query);
 		if (type != null)
