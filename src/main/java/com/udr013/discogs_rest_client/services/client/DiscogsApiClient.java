@@ -12,6 +12,7 @@ import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,6 +27,7 @@ public class DiscogsApiClient {
 	private static final String CONTENT_TYPE = "application/vnd.discogs.v2.discogs+json";
 	private static final String USER_AGENT = "user-agent";
 	private static final String USER_AGENT_NAME = "discogs_rest_client";
+	private static final String DISCOGS_TOKEN = "Discogs token=vhQqTYuspRRyBhWyzppgjJcMpQEgLezqkWwFiDgn";
 
 	private static final String BASE_URL = "https://api.discogs.com/";
 	private static final String SEARCH_URL = "/database/search";
@@ -39,7 +41,6 @@ public class DiscogsApiClient {
 	private static final String MASTER_VERSIONS_PATH = MASTER_PATH +"/versions";
 	private static final String LABEL_PATH = "/labels/{labelid}";
 	private static final String LABEL_RELEASE_PATH = LABEL_PATH + "/releases" ;
-	private static final String DISCOGS_TOKEN = "Discogs token=vhQqTYuspRRyBhWyzppgjJcMpQEgLezqkWwFiDgn";
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 

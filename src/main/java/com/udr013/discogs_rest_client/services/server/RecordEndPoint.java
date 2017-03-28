@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "api/record", produces = "application/json") // do not use consumes: body not null
 public class RecordEndPoint {
 
-	private static final String KEY = "key";
-	private static final String SECRET = "secret";
+//	private static final String KEY = "key";
+//	private static final String SECRET = "secret";
 	private static final String Q = "q";
 	private static final String TYPE = "type";
 	private static final String TITLE = "title";
