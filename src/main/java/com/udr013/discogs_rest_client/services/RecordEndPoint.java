@@ -1,4 +1,4 @@
-package com.udr013.discogs_rest_client.services.server;
+package com.udr013.discogs_rest_client.services;
 
 import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
 import com.udr013.discogs_rest_client.models.CollectionModel;
@@ -9,7 +9,7 @@ import com.udr013.discogs_rest_client.models.PageModel;
 import com.udr013.discogs_rest_client.models.PageVersionModel;
 import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
-import com.udr013.discogs_rest_client.services.client.DiscogsApiClient;
+import com.udr013.discogs_rest_client.client.DiscogsApiClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -194,8 +194,8 @@ public class RecordEndPoint {
 				release_title, anv, label, genre, style, country, year, format, catno, barcode, track, submitter,
 				contributor, page, per_page, sort_order, sort);
 
-		LOGGER.info("Entered getRecord, and we call the client with: " + queryparams.size() + "params");
-
+		LOGGER.info("info: Entered getRecord, and we call the client with: " + queryparams.size() + "params");
+		LOGGER.debug("debug: Entered getRecord, and we call the client with: " + queryparams.size() + "params");
 		return discogsApiClient.search(queryparams);
 	}
 

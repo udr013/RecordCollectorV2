@@ -1,4 +1,4 @@
-package com.udr013.discogs_rest_client.services.client;
+package com.udr013.discogs_rest_client.client;
 
 
 import com.udr013.discogs_rest_client.models.ArtistFullExtendedModel;
@@ -12,7 +12,6 @@ import com.udr013.discogs_rest_client.models.RatingExtendedModel;
 import com.udr013.discogs_rest_client.models.ReleaseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -42,7 +41,7 @@ public class DiscogsApiClient {
 	private static final String LABEL_PATH = "/labels/{labelid}";
 	private static final String LABEL_RELEASE_PATH = LABEL_PATH + "/releases" ;
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	private static HttpHeaders defaultHeaders;
 
@@ -61,6 +60,8 @@ public class DiscogsApiClient {
 	private HttpEntity entity = new HttpEntity<>("parameters", defaultHeaders);
 
 	public PageModel search(MultiValueMap<String, String> params) {
+		LOGGER.info("info: search was called with :" + params.keySet().size() + "params");
+		LOGGER.debug("debug: search was called with :" + params.keySet().size() + "params");
 
 		String url = buildUrl(SEARCH_URL, params, null);
 		PageModel response = restTemplate.exchange(url, HttpMethod.GET, entity, PageModel.class).getBody();
@@ -154,7 +155,10 @@ public class DiscogsApiClient {
 		}else{
 			url = UriComponentsBuilder.fromHttpUrl(BASE_URL).path(path).buildAndExpand(pathparam).toString();
 		}
-		log.info("This url was build: " + url);
+		LOGGER.debug("Debug: This url was build: " + url);
+		LOGGER.info("info: This url was build: " + url);
+
+
 		return url;
 
 	}
