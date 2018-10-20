@@ -7,11 +7,13 @@
  * # MainCtrl
  * Controller of the frontendApp
  */
-angular.module('frontendApp')
-  .controller('MainCtrl', function () {
+angular.module('app')
+  .controller('HomeCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+
   });

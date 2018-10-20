@@ -1,0 +1,42 @@
+<div>
+  <h1>Record Database <span class="small">(Discogs API Browser)</span></h1>
+  <h2>Browse:</h2>
+  <input class="input" type="text" ng-model="artistName" placeholder="find" required="required">
+  <button class="btn-success" onclick="">Search</button>
+  <p></p>
+  <table class="=table table-bordered table-striped col-lg-12">
+    <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="album in albums">
+    <td>{{album.artist}}</td>
+    <td>{{album.title}}</td>
+    <td>{{album.year}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+  </p>
+</div>
+<br/>
+
+<div class="row marketing">
+  <!--<h4>HTML</h4>-->
+  <!--<p>-->
+  <!--HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.-->
+  <!--</p>-->
+
+  <!--<h4>Angular</h4>-->
+  <!--<p>-->
+  <!--AngularJS is a toolset for building the framework most suited to your application development.-->
+  <!--</p>-->
+
+  <!--<h4>Karma</h4>-->
+  <!--<p>Spectacular Test Runner for JavaScript.</p>-->
+</div>
+<script></script>
