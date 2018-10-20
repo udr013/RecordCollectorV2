@@ -10,12 +10,6 @@
 angular.module('app')
   .controller('CollectionCtrl', function ($scope) {
       $scope.albums = [
-          {'artist':'Jimi Hendrixx', 'title':'Electric Ladyland', 'year':'1969'}
+          {'artist':'Jimi Hendrix', 'title':'Electric Ladyland', 'year':'1969'}
       ];
-
-    // this.awesomeThings = [
-    //   'HTML5 Boilerplate',
-    //   'AngularJS',
-    //   'Karma'
-    // ];
   });
