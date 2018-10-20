@@ -10,13 +10,13 @@
 angular.module('app')
     .factory('recordFactory', recordFactory)
   .controller('CollectionCtrl', function ($scope) {
+  feature/getAlbums
       // $scope.albums = [
       //     {'artist':'Jimi Hendrixx', 'title':'Electric Ladyland', 'year':'1969'}
       // ];
       $scope.getAlbums = function () {
           recordFactory.getRecords().succes(function (records) {
-
-
+          return records;
           })
       }
   });
