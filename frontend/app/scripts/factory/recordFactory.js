@@ -3,7 +3,7 @@ function recordFactory($http){
     factory.getRecords = function() {
         return $http({
             method: 'GET',
-            url: 'jimihendrix.json'
+            url: 'discogs.json'
         })
     }
 }
