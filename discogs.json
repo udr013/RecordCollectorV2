@@ -1,0 +1,448 @@
+{
+  "styles": [
+    "Soundtrack",
+    "Psychedelic Rock",
+    "Classic Rock"
+  ],
+  "videos": [
+    {
+      "duration": 270,
+      "description": "Jimi Hendrix - Dolly Dagger",
+      "embed": true,
+      "uri": "https://www.youtube.com/watch?v=-E2A60WslXg",
+      "title": "Jimi Hendrix - Dolly Dagger"
+    },
+    {
+      "duration": 452,
+      "description": "Jimi Hendrix Interview [Rainbow Bridge]",
+      "embed": true,
+      "uri": "https://www.youtube.com/watch?v=ocaEJVEpllc",
+      "title": "Jimi Hendrix Interview [Rainbow Bridge]"
+    },
+    {
+      "duration": 223,
+      "description": "JIMI HENDRIX Rainbow Bridge (Psychedelic Film  Intro)",
+      "embed": true,
+      "uri": "https://www.youtube.com/watch?v=ySvIP5b7DYc",
+      "title": "JIMI HENDRIX Rainbow Bridge (Psychedelic Film  Intro)"
+    },
+    {
+      "duration": 240,
+      "description": "Jimi Hendrix - Dolly Dagger (from Rainbow Bridge)",
+      "embed": true,
+      "uri": "https://www.youtube.com/watch?v=2JWxjQRagHo",
+      "title": "Jimi Hendrix - Dolly Dagger (from Rainbow Bridge)"
+    },
+    {
+      "duration": 720,
+      "description": "Jimi Hendrix - Hear My Train A Comin' (Denver Pop 1969)",
+      "embed": true,
+      "uri": "https://www.youtube.com/watch?v=i12jfGRnxVI",
+      "title": "Jimi Hendrix - Hear My Train A Comin' (Denver Pop 1969)"
+    }
+  ],
+  "series": [],
+  "labels": [
+    {
+      "name": "Reprise Records",
+      "entity_type": "1",
+      "catno": "K 44159",
+      "resource_url": "https://api.discogs.com/labels/157",
+      "id": 157,
+      "entity_type_name": "Label"
+    }
+  ],
+  "year": 0,
+  "community": {
+    "status": "Accepted",
+    "rating": {
+      "count": 23,
+      "average": 4.26
+    },
+    "have": 148,
+    "contributors": [
+      {
+        "username": "jussumen",
+        "resource_url": "https://api.discogs.com/users/jussumen"
+      },
+      {
+        "username": "Gipsyeyes",
+        "resource_url": "https://api.discogs.com/users/Gipsyeyes"
+      },
+      {
+        "username": "SoulDancer",
+        "resource_url": "https://api.discogs.com/users/SoulDancer"
+      },
+      {
+        "username": "Se-BusT-eL",
+        "resource_url": "https://api.discogs.com/users/Se-BusT-eL"
+      },
+      {
+        "username": "Uitta",
+        "resource_url": "https://api.discogs.com/users/Uitta"
+      },
+      {
+        "username": "e-kartoffel",
+        "resource_url": "https://api.discogs.com/users/e-kartoffel"
+      },
+      {
+        "username": "losAntonis",
+        "resource_url": "https://api.discogs.com/users/losAntonis"
+      },
+      {
+        "username": "stefanj",
+        "resource_url": "https://api.discogs.com/users/stefanj"
+      },
+      {
+        "username": "DiscogsUpdateBot",
+        "resource_url": "https://api.discogs.com/users/DiscogsUpdateBot"
+      },
+      {
+        "username": "spatial45",
+        "resource_url": "https://api.discogs.com/users/spatial45"
+      }
+    ],
+    "want": 31,
+    "submitter": {
+      "username": "jussumen",
+      "resource_url": "https://api.discogs.com/users/jussumen"
+    },
+    "data_quality": "Needs Vote"
+  },
+  "artists": [
+    {
+      "join": ",",
+      "name": "Jimi Hendrix",
+      "anv": "",
+      "tracks": "",
+      "role": "",
+      "resource_url": "https://api.discogs.com/artists/110593",
+      "id": 110593
+    }
+  ],
+  "images": [
+    {
+      "uri": "",
+      "height": 250,
+      "width": 250,
+      "resource_url": "",
+      "type": "primary",
+      "uri150": ""
+    },
+    {
+      "uri": "",
+      "height": 250,
+      "width": 250,
+      "resource_url": "",
+      "type": "secondary",
+      "uri150": ""
+    },
+    {
+      "uri": "",
+      "height": 602,
+      "width": 600,
+      "resource_url": "",
+      "type": "secondary",
+      "uri150": ""
+    },
+    {
+      "uri": "",
+      "height": 600,
+      "width": 600,
+      "resource_url": "",
+      "type": "secondary",
+      "uri150": ""
+    }
+  ],
+  "format_quantity": 1,
+  "id": 537719,
+  "genres": [
+    "Rock",
+    "Stage & Screen"
+  ],
+  "thumb": "",
+  "num_for_sale": 23,
+  "title": "Rainbow Bridge - Original Motion Picture Sound Track",
+  "date_changed": "2015-09-25T09:03:14-07:00",
+  "master_id": 25051,
+  "lowest_price": 5.413533834586466,
+  "status": "Accepted",
+  "estimated_weight": 230,
+  "master_url": "https://api.discogs.com/masters/25051",
+  "date_added": "2005-11-20T03:17:08-08:00",
+  "tracklist": [
+    {
+      "duration": "",
+      "position": "A1",
+      "type_": "track",
+      "extraartists": [
+        {
+          "join": "",
+          "name": "Buddy Miles",
+          "anv": "",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/254578",
+          "id": 254578
+        },
+        {
+          "join": "",
+          "name": "Jimi Hendrix",
+          "anv": "",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/110593",
+          "id": 110593
+        },
+        {
+          "join": "",
+          "name": "The Ghetto Fighters",
+          "anv": "Ghetto Fighters",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/403107",
+          "id": 403107
+        }
+      ],
+      "title": "Dolly Dagger"
+    },
+    {
+      "duration": "",
+      "position": "A2",
+      "type_": "track",
+      "extraartists": [
+        {
+          "join": "",
+          "name": "Buddy Miles",
+          "anv": "",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/254578",
+          "id": 254578
+        },
+        {
+          "join": "",
+          "name": "Jimi Hendrix",
+          "anv": "",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/110593",
+          "id": 110593
+        },
+        {
+          "join": "",
+          "name": "The Ronettes",
+          "anv": "",
+          "tracks": "",
+          "role": "Backing Vocals",
+          "resource_url": "https://api.discogs.com/artists/257236",
+          "id": 257236
+        }
+      ],
+      "title": "Earth Blues"
+    },
+    {
+      "duration": "",
+      "position": "A3",
+      "type_": "track",
+      "title": "Pali Gap"
+    },
+    {
+      "duration": "",
+      "position": "A4",
+      "type_": "track",
+      "extraartists": [
+        {
+          "join": "",
+          "name": "Buddy Miles",
+          "anv": "",
+          "tracks": "",
+          "role": "Drums",
+          "resource_url": "https://api.discogs.com/artists/254578",
+          "id": 254578
+        }
+      ],
+      "title": "Room Full Of Mirrors"
+    },
+    {
+      "duration": "",
+      "position": "A5",
+      "type_": "track",
+      "title": "Star Spangled Banner"
+    },
+    {
+      "duration": "",
+      "position": "B1",
+      "type_": "track",
+      "extraartists": [
+        {
+          "join": "",
+          "name": "Noel Redding",
+          "anv": "",
+          "tracks": "",
+          "role": "Bass",
+          "resource_url": "https://api.discogs.com/artists/252848",
+          "id": 252848
+        }
+      ],
+      "title": "Look Over Yonder"
+    },
+    {
+      "duration": "",
+      "position": "B2",
+      "type_": "track",
+      "title": "Hear My Train A Comin'"
+    },
+    {
+      "duration": "",
+      "position": "B3",
+      "type_": "track",
+      "extraartists": [
+        {
+          "join": "",
+          "name": "Juma Edwards",
+          "anv": "",
+          "tracks": "",
+          "role": "Percussion",
+          "resource_url": "https://api.discogs.com/artists/377237",
+          "id": 377237
+        }
+      ],
+      "title": "Hey, Baby"
+    }
+  ],
+  "extraartists": [
+    {
+      "join": "",
+      "name": "Billy Cox",
+      "anv": "",
+      "tracks": "A1 to A5, B2, B3",
+      "role": "Bass",
+      "resource_url": "https://api.discogs.com/artists/271220",
+      "id": 271220
+    },
+    {
+      "join": "",
+      "name": "Mitch Mitchell",
+      "anv": "",
+      "tracks": "A1 to A3, A5 to B3",
+      "role": "Drums",
+      "resource_url": "https://api.discogs.com/artists/252849",
+      "id": 252849
+    },
+    {
+      "join": "",
+      "name": "Allen Landau",
+      "anv": "",
+      "tracks": "ALLEN",
+      "role": "Mastered By",
+      "resource_url": "https://api.discogs.com/artists/869822",
+      "id": 869822
+    },
+    {
+      "join": "",
+      "name": "Eddie Kramer",
+      "anv": "",
+      "tracks": "",
+      "role": "Producer",
+      "resource_url": "https://api.discogs.com/artists/253216",
+      "id": 253216
+    },
+    {
+      "join": "",
+      "name": "Jimi Hendrix",
+      "anv": "",
+      "tracks": "",
+      "role": "Producer",
+      "resource_url": "https://api.discogs.com/artists/110593",
+      "id": 110593
+    },
+    {
+      "join": "",
+      "name": "John Jansen",
+      "anv": "",
+      "tracks": "",
+      "role": "Producer",
+      "resource_url": "https://api.discogs.com/artists/254159",
+      "id": 254159
+    },
+    {
+      "join": "",
+      "name": "Mitch Mitchell",
+      "anv": "",
+      "tracks": "",
+      "role": "Producer",
+      "resource_url": "https://api.discogs.com/artists/252849",
+      "id": 252849
+    }
+  ],
+  "country": "Europe",
+  "identifiers": [
+    {
+      "type": "Matrix / Runout",
+      "description": "Side A, hand-etched",
+      "value": "K-44159-A-3XX ALLEN "
+    },
+    {
+      "type": "Matrix / Runout",
+      "description": "Side B, stamped,crossed through",
+      "value": "K-54004 -B1"
+    },
+    {
+      "type": "Matrix / Runout",
+      "description": "Side B, stamped",
+      "value": "K-44159-B1X"
+    },
+    {
+      "type": "Label Code",
+      "value": "LC 0322"
+    }
+  ],
+  "companies": [
+    {
+      "name": "A. Schroeder Music",
+      "entity_type": "21",
+      "catno": "",
+      "resource_url": "https://api.discogs.com/labels/275162",
+      "id": 275162,
+      "entity_type_name": "Published By"
+    },
+    {
+      "name": "Kinney Record Group Ltd.",
+      "entity_type": "9",
+      "catno": "",
+      "resource_url": "https://api.discogs.com/labels/303518",
+      "id": 303518,
+      "entity_type_name": "Distributed By"
+    },
+    {
+      "name": "WEA Records Ltd.",
+      "entity_type": "9",
+      "catno": "",
+      "resource_url": "https://api.discogs.com/labels/43315",
+      "id": 43315,
+      "entity_type_name": "Distributed By"
+    },
+    {
+      "name": "Record Service GmbH",
+      "entity_type": "10",
+      "catno": "",
+      "resource_url": "https://api.discogs.com/labels/264652",
+      "id": 264652,
+      "entity_type_name": "Manufactured By"
+    }
+  ],
+  "uri": "https://www.discogs.com/Jimi-Hendrix-Rainbow-Bridge-Original-Motion-Picture-Sound-Track/release/537719",
+  "formats": [
+    {
+      "descriptions": [
+        "LP",
+        "Reissue"
+      ],
+      "name": "Vinyl",
+      "qty": "1"
+    }
+  ],
+  "resource_url": "https://api.discogs.com/releases/537719",
+  "data_quality": "Needs Vote"
+}
